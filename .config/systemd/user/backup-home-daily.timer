@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer Diario para el respaldo de Home
+
+[Timer]
+OnCalendar=*-*-* 11:11:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

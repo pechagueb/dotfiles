@@ -1,0 +1,6 @@
+[Unit]
+Description=Envía notificación con la frase de motivación (quotes.txt)
+
+[Service]
+Type=oneshot
+ExecStart=/home/patricioeb/.local/bin/notify-quotes.sh

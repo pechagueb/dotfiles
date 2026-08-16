@@ -1,0 +1,11 @@
+[Unit]
+Description=Ejecutar limpieza del sistema semanalmente
+
+[Timer]
+# Se ejecuta una vez por semana (los lunes a las 11:11)
+OnCalendar=Mon *-*-* 12:15:00
+# Si el ordenador estaba apagado a la hora programada, se ejecuta inmediatamente al encenderlo
+Persistent=true
+
+[Install]
+WantedBy=timers.target

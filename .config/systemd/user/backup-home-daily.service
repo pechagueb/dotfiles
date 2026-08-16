@@ -1,0 +1,6 @@
+[Unit]
+Description=Respaldo Diario Incremental de Home con rsync
+
+[Service]
+Type=oneshot
+ExecStart=/home/patricioeb/.local/bin/backup-home.sh daily
