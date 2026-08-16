@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #######################################################
 #   ____  _____ ____  
 #  |  _ \| ____| __ )  Autor: 
@@ -7,8 +9,6 @@
 #
 # Versión: 2.0 (Optimizado para systemd --user)
 #######################################################
-
-#!/bin/bash
 
 # 1. Sincronización
 rsync -av --delete /home/patricioeb/GoogleDrive/ /mnt/debian/home/patricioeb/GoogleDrive/

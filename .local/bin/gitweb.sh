@@ -1,3 +1,5 @@
+#!/bin/bash                 
+
 #######################################################
 #   ____  _____ ____  
 #  |  _ \| ____| __ )  Autor: 
@@ -6,8 +8,6 @@
 #  |_|   |_____|____/  Automatiza actualización dir en Github (WEB)
 #
 #######################################################
-
-#!/bin/bash                 
 
 # Verificar si se pasó el mensaje del commit como argumento
 if [ -z "$1" ]; then

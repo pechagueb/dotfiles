@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #######################################################
 #   ____  _____ ____  
 #  |  _ \| ____| __ )  Autor: 
@@ -7,8 +9,6 @@
 #
 # Uso: timerctl <nombre> [enable|disable|status|restart|logs|path]
 #######################################################
-
-#!/bin/bash
 
 # Colores para output (opcional, mejora legibilidad)
 RED='\033[0;31m'

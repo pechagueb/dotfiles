@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #######################################################
 #   ____  _____ ____  
 #  |  _ \| ____| __ )  Autor: 
@@ -6,8 +8,6 @@
 #  |_|   |_____|____/  Script de respaldo de /home (diario y semanal estilo Timeshift)
 #
 #######################################################
-
-#!/bin/bash
 
 # CONFIGURACIÓN
 SOURCE_DIR="$HOME/"

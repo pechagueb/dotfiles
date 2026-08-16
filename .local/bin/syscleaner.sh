@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #######################################################
 #   ____  _____ ____  
 #  |  _ \| ____| __ )  Autor: 
@@ -9,8 +11,6 @@
 # Calcula espacio liberado y notifica en GB
 # logs con: journalctl -t syscleaner
 #######################################################
-
-#!/bin/bash
 
 # Función para obtener espacio usado en GB
 get_used_space() {
