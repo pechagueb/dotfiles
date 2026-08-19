@@ -9,7 +9,7 @@ hl.on("hyprland.start", function ()
 
     -- Aplicaciones en segundo plano con sus respectivos delays procesados por shell
     hl.exec_cmd("sh -c 'sleep 3 && zapzap'")
-
+    hl.exec_cmd("sh -c 'sleep 5 && cachy-update --tray'")
     -- Iniciar el servidor de MEGA de forma silenciosa en el arranque
     hl.exec_cmd("sh -c 'mega-cmd-server > /dev/null 2>&1 &'")
 
