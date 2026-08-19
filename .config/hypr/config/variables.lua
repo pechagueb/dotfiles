@@ -2,7 +2,6 @@
 
 TERMINAL     = "kitty"
 FILE_MANAGER = "dolphin"
--- BROWSER      = "vivaldi"
 BROWSER      = "zen-browser"
 INCOGNITO    = "zen-browser --private-window"
 EDITOR       = "vscodium"
