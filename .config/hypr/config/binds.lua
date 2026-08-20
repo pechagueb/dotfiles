@@ -51,6 +51,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 
 -- Applications
 hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
+hl.bind(mainMod .. " + SHIFT + T",  hl.dsp.exec_cmd(launchPrefix .. TERMINAL2))
 hl.bind("CONTROL + SHIFT + Escape", hl.dsp.exec_cmd(launchPrefix .. TERMINAL .. " -e btop"))
 hl.bind(mainMod .. " + D",          hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER))
 hl.bind(mainMod .. " + T",          hl.dsp.exec_cmd(launchPrefix .. EDITOR))

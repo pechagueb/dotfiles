@@ -1,6 +1,7 @@
 -- Hyprland default apps
 
 TERMINAL     = "kitty"
+TERMINAL2    = "ghostty"
 FILE_MANAGER = "dolphin"
 BROWSER      = "zen-browser"
 INCOGNITO    = "zen-browser --private-window"

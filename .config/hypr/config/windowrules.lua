@@ -133,3 +133,11 @@ hl.window_rule({
     center = true,
     size = { 1650, 900 }
 })
+
+-- Reglas para el TERMINAL2 - ghostty (flotante, centrado y redimensionado)
+hl.window_rule({
+    match = { class = ".*" .. TERMINAL2 .. ".*" },
+    float = true,
+    center = true,
+    size = { 1650, 900 }
+})
