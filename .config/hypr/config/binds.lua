@@ -69,7 +69,7 @@ hl.bind(mainMod .. " + Y",          hl.dsp.exec_cmd(launchPrefix .. YTSTUDIO))
 
 --Noctalia
 hl.bind(mainMod .. " + Z",          hl.dsp.exec_cmd(noctCall .. "settings-toggle"))
-hl.bind(mainMod .. " + X",          hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center"))
+hl.bind(mainMod .. " + SHIFT + X",  hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center"))
 hl.bind(mainMod .. " + Space",      hl.dsp.exec_cmd(noctCall .. "panel-toggle launcher"))
 hl.bind(mainMod .. " + period",     hl.dsp.exec_cmd(noctCall .. "panel-toggle launcher /emo"))
 hl.bind(mainMod .. " + L",          hl.dsp.exec_cmd(noctCall .. "session lock"))
@@ -122,6 +122,9 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(noctCall .. "panel-toggle clipboard")
 
 -- Notificaciones
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center notifications"))
+
+-- Dictado por voz VoxType (Toggle)
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("voxtype record toggle"))
 
 -------------------------------
 ---- WORKSPACES & MONITORS ----
