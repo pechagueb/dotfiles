@@ -3,15 +3,19 @@
 
 hl.on("hyprland.start", function ()
 
-    hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+    -- Importar todas las variables de sesión (WAYLAND_DISPLAY, XDG_RUNTIME_DIR, etc.) a systemd
+    hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
+    hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE")
+
     hl.exec_cmd("noctalia")
     hl.exec_cmd("xhost +SI:localuser:root")
 
-    -- Aplicaciones en segundo plano con sus respectivos delays procesados por shell
+    -- Reiniciar el servicio ya con las variables del entorno gráfico cargadas
+    hl.exec_cmd("sh -c 'sleep 2 && systemctl --user restart voxtype.service'")
+
+    -- Otras aplicaciones
     hl.exec_cmd("sh -c 'sleep 3 && zapzap'")
     hl.exec_cmd("sh -c 'sleep 5 && cachy-update --tray'")
-    -- Iniciar el servidor de MEGA de forma silenciosa en el arranque
     hl.exec_cmd("sh -c 'mega-cmd-server > /dev/null 2>&1 &'")
 
 end)
-

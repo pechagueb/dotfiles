@@ -76,6 +76,7 @@ if status is-interactive
     abbr -a bt btop
     abbr -a red nmtui
 
+
     #######################################################
     # Aliases
     #######################################################
@@ -84,6 +85,7 @@ if status is-interactive
     alias lz='eza -lahF --git --icons --sort=ext'
     alias grep='grep --color=auto'
     alias gitout='/home/patricioeb/.local/bin/gitout.sh'
+    alias img='/home/patricioeb/.local/bin/imgconv.sh'
     alias iploc="ip -br -c a"
     alias ippub="curl -s ifconfig.me && echo"
 
