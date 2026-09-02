@@ -1,7 +1,15 @@
 #!/bin/bash
 
-# Script de configuración de Zen Browser para Linux
-# Ruta de perfil estrictamente configurada en ~/.zen
+#######################################################
+#   ____  _____ ____  
+#  |  _ \| ____| __ )  Autor: 
+#  | |_) |  _| |  _ \  Patricio Echagüe Ballesteros
+#  |  __/| |___| |_) | Descripción:
+#  |_|   |_____|____/  Script de configuración de Zen Browser para Linux
+#
+#######################################################
+
+# 
 
 # Colores
 RED='\033[0;31m'
