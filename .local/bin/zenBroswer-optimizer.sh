@@ -9,8 +9,6 @@
 #
 #######################################################
 
-# 
-
 # Colores
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -107,7 +105,7 @@ main() {
     local BROWSER_NAME="Zen Browser"
     
     echo -e "${WHITE}Navegador configurado: ${WHITE}$BROWSER_NAME${NC}"
-    echo -e "${CYAN}Buscando perfil en $HOME/.zen...${NC}"
+    echo -e "${CYAN}Buscando perfil en $HOME/.config/zen...${NC}"
     
     PERFIL=$(encontrar_perfil)
     USER_JS="$PERFIL/user.js"
@@ -122,7 +120,7 @@ main() {
         echo ""
     fi
     
-    echo "// Configuración de $BROWSER_NAME - ~/.zen" > "$USER_JS"
+    echo "// Configuración de $BROWSER_NAME - ~/.config/zen" > "$USER_JS"
     echo "// Fecha: $(date)" >> "$USER_JS"
     echo "" >> "$USER_JS"
     
@@ -138,42 +136,30 @@ main() {
         echo ""
     fi
     
-    # 2. Parámetros de GPU
+    # 2. Parámetros de GPU 
     if preguntar "¿Aplicar cambios a los parámetros de GPU?"; then
         echo ""
-        echo -e "${CYAN}Aplicando parámetros de GPU...${NC}"
+        echo -e "${CYAN}Aplicando parámetros de GPU seguros...${NC}"
         agregar_parametros "$USER_JS" \
             "// Parámetros de GPU" \
             'user_pref("dom.webgpu.enabled", true);' \
-            'user_pref("gfx.webgpu.ignore-blocklist", true);' \
-            'user_pref("gfx.webrender.wait-gpu-finished.disabled", true);' \
-            'user_pref("layers.gpu-process.crash-also-crashes-browser", true);' \
             'user_pref("layers.gpu-process.enabled", true);' \
-            'user_pref("layers.gpu-process.force-enabled", true);' \
-            'user_pref("media.gpu-process-decoder", true);' \
-            'user_pref("media.gpu-process-encoder", true);' \
-            'user_pref("media.hardware-video-decoding.force-enabled", true);' \
+            'user_pref("media.gpu-process-decoder", false);' \
+            'user_pref("media.hardware-video-decoding.force-enabled", false);' \
             ""
         echo -e "${GREEN}✓ Parámetros de GPU aplicados${NC}"
         echo ""
     fi
     
-    # 3. Parámetros de WebRender (WebGL)
+    # 3. Parámetros de WebRender (WebGL seguro)
     if preguntar "¿Aplicar cambios a los parámetros de WebRender (WebGL)?"; then
         echo ""
-        echo -e "${CYAN}Aplicando parámetros de WebRender...${NC}"
+        echo -e "${CYAN}Aplicando parámetros de WebRender seguros...${NC}"
         agregar_parametros "$USER_JS" \
-            "// Parámetros de WebRender (WebGL)" \
-            'user_pref("layers.acceleration.force-enabled", true);' \
-            'user_pref("layers.acceleration.disabled", false);' \
+            "// Parámetros de WebRender" \
             'user_pref("webgl.force-enabled", true);' \
-            'user_pref("gfx.canvas.azure.accelerated", true);' \
-            'user_pref("gfx.webrender.all", true);' \
-            'user_pref("gfx.webrender.compositor", true);' \
-            'user_pref("gfx.webrender.compositor.force-enabled", true);' \
-            'user_pref("gfx.webrender.debug.slow-cpu-frame-threshold", 0);' \
-            'user_pref("gfx.webrender.layer-compositor", true);' \
-            'user_pref("gfx.webrender.wait-gpu-finished.disabled", true);' \
+            'user_pref("gfx.webrender.all", false);' \
+            'user_pref("gfx.webrender.compositor", false);' \
             ""
         echo -e "${GREEN}✓ Parámetros de WebRender aplicados${NC}"
         echo ""
@@ -199,17 +185,18 @@ main() {
         echo ""
     fi
     
-    # 5. Parámetros de códec de vídeo
-    if preguntar "¿Aplicar cambios a los parámetros de códec de vídeo?"; then
+    # 5. Parámetros de códec de vídeo y aceleración Wayland
+    if preguntar "¿Aplicar cambios a los parámetros de códec de vídeo y corrección de color?"; then
         echo ""
-        echo -e "${CYAN}Aplicando parámetros de códec de vídeo...${NC}"
+        echo -e "${CYAN}Aplicando parámetros de códec y solución de tinte rojo...${NC}"
         agregar_parametros "$USER_JS" \
-            "// Parámetros de códec de vídeo" \
+            "// Parámetros de códec de vídeo y Wayland" \
             'user_pref("media.av1.enabled", false);' \
             'user_pref("media.ffvpx.enabled", false);' \
-            'user_pref("media.ffmpeg.vaapi.enabled", true);' \
+            'user_pref("media.ffmpeg.vaapi.enabled", false);' \
+            'user_pref("widget.dmabuf-textured-video.enabled", false);' \
             ""
-        echo -e "${GREEN}✓ Parámetros de códec de vídeo aplicados${NC}"
+        echo -e "${GREEN}✓ Parámetros de códec aplicados${NC}"
         echo ""
     fi
 
@@ -225,13 +212,61 @@ main() {
         echo -e "${GREEN}✓ Parámetros de memoria caché aplicados${NC}"
         echo ""
     fi
+
+    # 7. Automatización de limpieza de caché y parcheo directo en prefs.js
+    echo -e "${CYAN}Ejecutando limpieza profunda y forzando correcciones de color...${NC}"
+    
+    if [[ -d "$PERFIL/startupCache" ]]; then
+        rm -rf "$PERFIL/startupCache"
+        echo -e "${YELLOW}• Caché de inicio eliminada.${NC}"
+    fi
+    
+    if [[ -d "$PERFIL/cache2" ]]; then
+        rm -rf "$PERFIL/cache2"
+        echo -e "${YELLOW}• Caché web eliminada.${NC}"
+    fi
+    
+    if [[ -f "$PERFIL/prefs.js" ]]; then
+        sed -i '/widget\.dmabuf-textured-video\.enabled/d' "$PERFIL/prefs.js"
+        echo 'user_pref("widget.dmabuf-textured-video.enabled", false);' >> "$PERFIL/prefs.js"
+        
+        sed -i '/media\.ffmpeg\.vaapi\.enabled/d' "$PERFIL/prefs.js"
+        echo 'user_pref("media.ffmpeg.vaapi.enabled", false);' >> "$PERFIL/prefs.js"
+        
+        sed -i '/gfx\.webrender\.all/d' "$PERFIL/prefs.js"
+        echo 'user_pref("gfx.webrender.all", false);' >> "$PERFIL/prefs.js"
+        
+        echo -e "${GREEN}✓ prefs.js parcheado directamente con éxito.${NC}"
+    fi
+    
+    # 8. Corrección forzada para el bug de decodificación de vídeo en Intel/Wayland (Tinte rojo)
+    echo -e "${CYAN}Aplicando parche definitivo para el bug de color en Intel UHD...${NC}"
+    agregar_parametros "$USER_JS" \
+        "// Corrección bug de color Intel/Wayland" \
+        'user_pref("media.hardware-video-decoding.enabled", false);' \
+        'user_pref("media.rdd-process.enabled", false);' \
+        'user_pref("gfx.color_management.native_sRGB", false);' \
+        ""
+        
+    if [[ -f "$PERFIL/prefs.js" ]]; then
+        sed -i '/media\.hardware-video-decoding\.enabled/d' "$PERFIL/prefs.js"
+        echo 'user_pref("media.hardware-video-decoding.enabled", false);' >> "$PERFIL/prefs.js"
+        
+        sed -i '/media\.rdd-process\.enabled/d' "$PERFIL/prefs.js"
+        echo 'user_pref("media.rdd-process.enabled", false);' >> "$PERFIL/prefs.js"
+    fi
+    echo -e "${GREEN}✓ Parche de color aplicado en user.js y prefs.js${NC}"
+    echo ""
+
     
     echo -e "${CYAN}═══════════════════════════════════════════════════════════════${NC}"
     echo -e "${GREEN}           ¡Configuración completada con éxito!${NC}"
     echo -e "${CYAN}═══════════════════════════════════════════════════════════════${NC}"
     echo -e "${YELLOW}Archivo generado: ${WHITE}$USER_JS${NC}"
-    echo -e "${WHITE}• Reinicia Zen Browser para aplicar los cambios.${NC}"
+    echo -e "${WHITE}• Cierra por completo Zen Browser y vuelve a abrirlo.${NC}"
     echo ""
+
 }
+
 
 main
