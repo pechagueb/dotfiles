@@ -12,9 +12,9 @@ PDFVIEWER    = "okular"
 MAIL         = "thunderbird"
 
 -- PWA
-INSTAGRAM    = "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=akpamiohjfcnimfljfndmaldlcfphjmp"
-FACEBOOK     = "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=kippjfofjhjlffjecoapiogbkgbpmgej"
-YTSTUDIO     = "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=agimnkijcaahngcdmfeangaknmldooml"
+INSTAGRAM    = "/opt/google/chrome/google-chrome --password-store=basic --profile-directory=Default --app-id=akpamiohjfcnimfljfndmaldlcfphjmp"
+FACEBOOK     = "/opt/google/chrome/google-chrome --password-store=basic --profile-directory=Default --app-id=kippjfofjhjlffjecoapiogbkgbpmgej"
+YTSTUDIO     = "/opt/google/chrome/google-chrome --password-store=basic --profile-directory=Default --app-id=agimnkijcaahngcdmfeangaknmldooml"
 
 -- Monitors
 MONITOR1 = ""
