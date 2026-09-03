@@ -194,6 +194,12 @@
       "timeout": 5000
     },
     {
+      "type": "command",
+      "key": "│ DNS:      ",
+      "keyColor": "38;2;61;174;233",
+      "text": "resolvectl dns 2>/dev/null | awk '{for(i=4;i<=NF;i++) print $i}' | head -n 2 | paste -sd ', ' - || awk '/^nameserver/ && $2 != \"127.0.0.53\" {print $2}' /etc/resolv.conf | head -n 2 | paste -sd ', ' -"
+    },
+    {
       "type": "locale",
       "key": "│ Locale:   ",
       "keyColor": "38;2;61;174;233"
