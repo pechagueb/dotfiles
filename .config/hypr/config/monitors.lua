@@ -9,8 +9,15 @@
 -- })
 
 hl.monitor({
-     output    = "MONITOR1",
+     output    = "DP-1",
      mode      = "1920x1080@60",
-     position  = "0x0",
+     position  = "1800x0",
      scale     = "1",
+})
+
+hl.monitor({
+    output   = "HEADLESS-1",
+    mode     = "1800x1200@60",
+    position = "0x590",
+    scale    = "1",
 })

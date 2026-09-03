@@ -75,6 +75,7 @@ if status is-interactive
     abbr -a ff fastfetch
     abbr -a bt btop
     abbr -a red nmtui
+    abbr -a rb reboot
 
 
     #######################################################

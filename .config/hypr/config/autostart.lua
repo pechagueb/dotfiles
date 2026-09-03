@@ -19,4 +19,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("sh -c 'sleep 5 && cachy-update --tray'")
     hl.exec_cmd("sh -c 'mega-cmd-server > /dev/null 2>&1 &'")
 
+    -- Crear monitor virtual headless con un retardo para asegurar que el compositor y los portales estén listos
+    hl.exec_cmd("sh -c 'sleep 4 && hyprctl output create headless HEADLESS-1'")
+
 end)

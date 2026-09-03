@@ -1,0 +1,11 @@
+[Unit]
+Description=Weylus Second Monitor Server
+After=graphical-session.target xdg-desktop-portal.service
+
+[Service]
+ExecStartPre=/bin/sleep 8
+ExecStart=/usr/bin/weylus
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
