@@ -89,6 +89,7 @@ if status is-interactive
     alias img='/home/patricioeb/.local/bin/imgconv.sh'
     alias iploc="ip -br -c a"
     alias ippub="curl -s ifconfig.me && echo"
+    alias vm='/home/patricioeb/.local/bin/virMon-onOff.sh'
 
 end
 
