@@ -52,7 +52,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 -- Applications
 hl.bind(mainMod .. " + Return",     hl.dsp.exec_cmd(launchPrefix .. TERMINAL))
 hl.bind(mainMod .. " + SHIFT + T",  hl.dsp.exec_cmd(launchPrefix .. TERMINAL2))
-hl.bind("CONTROL + SHIFT + Escape", hl.dsp.exec_cmd(launchPrefix .. TERMINAL .. " -e btop"))
+hl.bind("CONTROL + SHIFT + Escape", hl.dsp.exec_cmd(launchPrefix .. TERMINAL2 .. " -e btop"))
+hl.bind(mainMod .. " + Y",          hl.dsp.exec_cmd(launchPrefix .. TERMINAL2 .. " -e yazi"))
 hl.bind(mainMod .. " + D",          hl.dsp.exec_cmd(launchPrefix .. FILE_MANAGER))
 hl.bind(mainMod .. " + T",          hl.dsp.exec_cmd(launchPrefix .. EDITOR))
 hl.bind(mainMod .. " + C",          hl.dsp.exec_cmd(launchPrefix .. CALCULATOR))
@@ -65,7 +66,6 @@ hl.bind(mainMod .. " + S",          hl.dsp.exec_cmd(launchPrefix .. "kshutdown")
 -- PWA
 hl.bind(mainMod .. " + I",          hl.dsp.exec_cmd(launchPrefix .. INSTAGRAM))
 hl.bind(mainMod .. " + F",          hl.dsp.exec_cmd(launchPrefix .. FACEBOOK))
-hl.bind(mainMod .. " + Y",          hl.dsp.exec_cmd(launchPrefix .. YTSTUDIO))
 
 --Noctalia
 hl.bind(mainMod .. " + Z",          hl.dsp.exec_cmd(noctCall .. "settings-toggle"))
@@ -157,7 +157,3 @@ hl.bind(mainMod .. " + mouse_down",           hl.dsp.focus({ workspace = "m+1" }
 hl.bind(mainMod .. " + mouse_up",             hl.dsp.focus({ workspace = "m-1" }))
 hl.bind(mainMod .. " + CONTROL + mouse_up",   hl.dsp.focus({ workspace = "m+1" }))
 hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m-1" }))
-
--- Special workspace (scratchpad)
--- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
--- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
