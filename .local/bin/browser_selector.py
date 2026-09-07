@@ -15,7 +15,7 @@ from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QLabel, 
     QPushButton, QListWidget, QListWidgetItem
 )
-from PyQt6.QtCore import QTimer, Qt
+from PyQt6.QtCore import QTimer, Qt, QEvent
 from PyQt6.QtGui import QFont
 
 CONFIG_FILE = os.path.expanduser("~/.local/bin/browsers.json")
@@ -52,12 +52,21 @@ class BrowserSelector(QWidget):
     def __init__(self):
         super().__init__()
         self.config = load_config()
-        self.timeout = self.config.get("timeout", 5)
+        self.timeout = self.config.get("timeout", 10)
         self.default_index = self.config.get("default_index", 0)
         self.browsers = self.config.get("browsers", [])
         
         self.init_ui()
         self.init_timer()
+        
+        # Instalar un filtro de eventos global en la aplicación para detectar cualquier clic o tecla
+        QApplication.instance().installEventFilter(self)
+
+    def eventFilter(self, obj, event):
+        # Pausar el temporizador ante cualquier clic del ratón o pulsación de tecla en la app
+        if event.type() in (QEvent.Type.MouseButtonPress, QEvent.Type.KeyPress):
+            self.pause_timer()
+        return super().eventFilter(obj, event)
 
     def init_ui(self):
         self.setWindowTitle("Seleccionar Navegador")
@@ -165,11 +174,6 @@ class BrowserSelector(QWidget):
             self.timer.stop()
             self.launch_default()
 
-    def mousePressEvent(self, event):
-        # Pausar el temporizador si el usuario hace clic o interactúa
-        self.pause_timer()
-        super().mousePressEvent(event)
-
     def keyPressEvent(self, event):
         self.pause_timer()
         if event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
@@ -198,18 +202,14 @@ class BrowserSelector(QWidget):
         browser_data = self.browsers[index]
         cmd = browser_data["command"]
         
-        # Reemplazar comodines genéricos si los hay o limpiar variables estilo %u / %U para bash
-        # Ejecutamos de forma desacoplada con subprocess
         try:
-            # Dividir el comando de manera segura respetando argumentos
-            # Limpiamos los especificadores de escritorio (%u, %U) para la ejecución directa
             clean_cmd = cmd.replace("%u", "").replace("%U", "").strip()
             subprocess.Popen(clean_cmd, shell=True)
         except Exception as e:
             print(f"Error al iniciar el navegador: {e}")
         
         sys.exit(0)
-
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     selector = BrowserSelector()
