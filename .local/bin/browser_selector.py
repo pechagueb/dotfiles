@@ -18,12 +18,12 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import QTimer, Qt
 from PyQt6.QtGui import QFont
 
-CONFIG_FILE = os.path.expanduser("~/.config/browser_selector/browsers.json")
+CONFIG_FILE = os.path.expanduser("~/.local/bin/browsers.json")
 
 # Crear configuración por defecto si no existe (verificar ejecutables)
 def load_config():
     default_data = {
-        "timeout": 5,
+        "timeout": 10,
         "default_index": 0,
         "browsers": [
             {"name": "Google Chrome", "command": "/usr/bin/google-chrome-stable %U"},
@@ -32,18 +32,20 @@ def load_config():
         ]
     }
     
-    # Intentar buscar en directorio local o crear
-    path = "browsers.json"
-    if not os.path.exists(path):
-        os.makedirs(os.path.dirname(path), exist_ok=True) if os.path.dirname(path) else None
-        with open(path, "w") as f:
-            json.dump(default_data, f, indent=4)
+    if not os.path.exists(CONFIG_FILE):
+        try:
+            os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
+            with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+                json.dump(default_data, f, indent=4, ensure_ascii=False)
+        except Exception as e:
+            print(f"Error creando configuración: {e}")
         return default_data
     
     try:
-        with open(path, "r") as f:
+        with open(CONFIG_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
-    except Exception:
+    except Exception as e:
+        print(f"Error al leer la configuración: {e}")
         return default_data
 
 class BrowserSelector(QWidget):
