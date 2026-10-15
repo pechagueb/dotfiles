@@ -124,7 +124,7 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(noctCall .. "panel-toggle clipboard")
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-center notifications"))
 
 -- Dictado por voz VoxType (Toggle)
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("voxtype record toggle"))
+-- hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("voxtype record toggle"))
 
 -------------------------------
 ---- WORKSPACES & MONITORS ----
