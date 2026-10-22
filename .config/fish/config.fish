@@ -71,7 +71,7 @@ if status is-interactive
     #######################################################
     abbr -a ed $EDITOR
     abbr -a tg topgrade -y
-    abbr -a st speedtest++
+    abbr -a st speedtest
     abbr -a ff fastfetch
     abbr -a bt btop
     abbr -a red nmtui
